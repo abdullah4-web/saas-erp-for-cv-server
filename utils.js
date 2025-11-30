@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const winston = require('winston');
 const mongoose = require('mongoose');
 
-const ApiLog = require('../server/models/apiLogModel');
+const ApiLog = require('./models/apiLogModel');
 const BlockedIP = require('./models/blockIpModel');
 const sendAlertEmail = require('./utils/emailAlert');
 
