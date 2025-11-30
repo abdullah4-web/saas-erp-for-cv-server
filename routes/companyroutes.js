@@ -10,6 +10,7 @@ const Branch = require('../models/branchModel');
 const Pipeline = require('../models/pipelineModel');
 const ProductStage = require('../models/productStageModel');
 const { generateToken } = require('../utils');
+const bcrypt = require('bcrypt');
 
 // Cloudinary setup
 const cloudinary = require('cloudinary').v2;
@@ -147,11 +148,14 @@ const registerCompany = async (req, res) => {
       )
     );
 
+    // ✅ Hash admin password before saving
+    const hashedPassword = await bcrypt.hash(adminPassword, 10);
+
     // ✅ Create admin user linked to company, product, and branch
     const adminUser = await User.create({
       name: adminName,
-      email: adminEmail,
-      password: adminPassword,
+      email: adminEmail.toLowerCase(),
+      password: hashedPassword, // use hashed password
       role: 'Admin',
       image: logoUrl,
       permissions: defaultAdminPermissions,
