@@ -414,7 +414,7 @@ const verifyFrontendOrigin = async (req, res, next) => {
 const enforceTrustedOrigin = (req, res, next) => {
   const origin = req.get('origin');
   const referer = req.get('referer');
-  const trusted = process.env.TRUSTED_ORIGIN || 'http://localhost:3000';
+  const trusted = process.env.TRUSTED_ORIGIN || 'https://saas-erp-for-cv.netlify.app';
 
   if (isFromFrontend(req)) return next();
 
