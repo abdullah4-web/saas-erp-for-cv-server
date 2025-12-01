@@ -1223,7 +1223,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Find user with populated references
-    const user = await User.findOne({ email: email.toLowerCase() })
+    const user = await User.findOne({ email: email })
       .populate('pipeline', 'name')
       .populate('products', 'name')
       .populate('branch', 'name')
@@ -1234,7 +1234,7 @@ router.post('/login', async (req, res) => {
       .populate('position', 'name');
 
     if (!user || user.isBlocked) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'User Has Been Blocked ' });
     }
 
     // Compare password
