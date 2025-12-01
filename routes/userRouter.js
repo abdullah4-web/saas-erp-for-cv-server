@@ -1233,9 +1233,9 @@ router.post('/login', async (req, res) => {
       .populate('national', 'name')
       .populate('position', 'name');
 
-    if (!user || user.isBlocked) {
-      return res.status(401).json({ message: 'User Has Been Blocked ' });
-    }
+    // if (!user || user.isBlocked) {
+    //   return res.status(401).json({ message: 'User Has Been Blocked ' });
+    // }
 
     // Compare password
     const match = await bcrypt.compare(password, user.password);
